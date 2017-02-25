@@ -3,6 +3,7 @@ import time
 import settings
 from slackclient import SlackClient
 from random import getrandbits
+import humanize
 
 AT_BOT = "<@{}>".format(settings.BOT_ID)
 
@@ -21,8 +22,8 @@ command_list = {
     'company name': fake.company(),
     'mission statement': fake.catch_phrase(),
     'buzzword': fake.bs(),
-    'deadline': fake.date_time_this_year(before_now=True, after_now=False, tzinfo=None),
-    'crunchtime': fake.date_time_this_month(before_now=True, after_now=False, tzinfo=None),
+    'deadline': humanize.naturaldate(fake.date_time_this_year(before_now=False, after_now=True, tzinfo=None)),
+    'crunchtime': humanize.naturaltime(fake.date_time_this_year(before_now=False, after_now=True, tzinfo=None)),
     'domain': fake.domain_name(),
     'email': fake.email(),
     'username': fake.user_name(),
